@@ -18,12 +18,31 @@ import tensorflow as tf
 from flask import Flask, request, jsonify, send_file
 from io import BytesIO
 from flask_cors import CORS
+import pyrebase # ===> pip3 install pyrebase4
 
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route('/api', methods=['GET'])
 def predict():
+
+    firebaseConfig = {
+        "apiKey": "AIzaSyBf9wuEg2IYArzCzf-VKmIvLXOr20O7UOk",
+        "authDomain": "audios-453ef.firebaseapp.com",
+        "projectId": "audios-453ef",
+        "storageBucket": "audios-453ef.appspot.com",
+        "messagingSenderId": "722321231787",
+        "appId": "1:722321231787:web:2f516f603216a580794cee",
+        "measurementId": "G-2MZMW2J8QX",
+        "databaseURL": "https://audios-453ef-default-rtdb.europe-west1.firebasedatabase.app/"
+    }
+
+    firebase = pyrebase.initialize_app(firebaseConfig)
+
+    storage = firebase.storage()
+
+
     # Load pre-trained model
     model_path = './model1.h5'
     if not os.path.isfile(model_path):
@@ -35,12 +54,15 @@ def predict():
         return jsonify(error='Query parameter not found'), 400
     
 
-    try:
-        with open(query, "rb") as f:
-                audio_data = BytesIO(f.read())
-    except FileNotFoundError:
-        return 'Audio file not found.'
+    # try:
+    #     with open(query, "rb") as f:
+    #             audio_data = BytesIO(f.read())
+    # except FileNotFoundError:
+    #     return 'Audio file not found.'
 
+
+    # to download and audio based on the name
+    storage.child(query).download("audios/","./audios/"+query)
 
 
     model = tf.keras.models.load_model(model_path)
@@ -62,7 +84,7 @@ def predict():
         return spectrogram
 
     # Extract spectrogram features for the audio sample
-    voice_spec = extract_features(audio_data)
+    voice_spec = extract_features("audios/"+query)
 
     # Make a prediction on the audio sample
     prediction = model.predict(np.array([voice_spec]))
@@ -74,6 +96,12 @@ def predict():
 
     # Close the TensorFlow session
     tf.keras.backend.clear_session()
+
+    # delete the file locally
+    os.remove("audios/"+query)
+
+    # delete audio from firebase
+    #storage.delete(query,"")
 
     # Return the predicted category as a JSON object
     return jsonify(output=predicted_category)
