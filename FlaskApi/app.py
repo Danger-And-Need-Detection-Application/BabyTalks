@@ -23,6 +23,10 @@ import pyrebase # ===> pip3 install pyrebase4
 app = Flask(__name__)
 CORS(app)
 
+# Load the TFLite model
+model_path = './my_model.tflite'
+interpreter = tf.lite.Interpreter(model_path=model_path)
+interpreter.allocate_tensors()
 
 @app.route('/api', methods=['GET'])
 def predict():
@@ -43,8 +47,9 @@ def predict():
     storage = firebase.storage()
 
 
+
     # Load pre-trained model
-    model_path = './model1.h5'
+    #model_path = './model1.h5'
     if not os.path.isfile(model_path):
         return jsonify(error='Model file not found'), 500
     
@@ -65,34 +70,56 @@ def predict():
     storage.child(query).download("audios/","./audios/"+query)
 
 
-    model = tf.keras.models.load_model(model_path)
+    # model = tf.keras.models.load_model(model_path)
 
-    # Define function to extract spectrogram features
-    def extract_features(file_path):
-        y, sr = librosa.load(file_path, sr=None)
+    # # Define function to extract spectrogram features
+    # def extract_features(file_path):
+    #     y, sr = librosa.load(file_path, sr=None)
 
-        n_fft = 2048
-        hop_length = 256
-        n_mels = 128
-        mel_spec = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=n_fft, hop_length=hop_length, n_mels=n_mels)
-        log_mel_spec = librosa.power_to_db(mel_spec, ref=np.max)
-        # Resize spectrogram to (128, 128, 1)
-        spectrogram = cv2.resize(log_mel_spec, (128, 128))
-        # Add channel dimension
-        spectrogram = np.expand_dims(spectrogram, axis=-1)
+    #     n_fft = 2048
+    #     hop_length = 256
+    #     n_mels = 128
+    #     mel_spec = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=n_fft, hop_length=hop_length, n_mels=n_mels)
+    #     log_mel_spec = librosa.power_to_db(mel_spec, ref=np.max)
+    #     # Resize spectrogram to (128, 128, 1)
+    #     spectrogram = cv2.resize(log_mel_spec, (128, 128))
+    #     # Add channel dimension
+    #     spectrogram = np.expand_dims(spectrogram, axis=-1)
 
-        return spectrogram
+    #     return spectrogram
 
-    # Extract spectrogram features for the audio sample
-    voice_spec = extract_features("audios/"+query)
+    # # Extract spectrogram features for the audio sample
+    # voice_spec = extract_features("audios/"+query)
 
-    # Make a prediction on the audio sample
-    prediction = model.predict(np.array([voice_spec]))
-    predicted_label = np.argmax(prediction)
+    # # Make a prediction on the audio sample
+    # prediction = model.predict(np.array([voice_spec]))
+    # predicted_label = np.argmax(prediction)
 
-    # Convert the predicted label to its corresponding category name
+    # # Convert the predicted label to its corresponding category name
+    # categories = ['belly_pain', 'burping', 'discomfort', 'hungry', 'tired']
+    # predicted_category = categories[predicted_label]
+
+    # Extract features from the audio file
+    y, sr = librosa.load("audios/"+query, sr=None)
+    n_fft = 2048
+    hop_length = 256
+    n_mels = 128
+    mel_spec = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=n_fft, hop_length=hop_length, n_mels=n_mels)
+    log_mel_spec = librosa.power_to_db(mel_spec, ref=np.max)
+    spectrogram = cv2.resize(log_mel_spec, (128, 128))
+    spectrogram = np.expand_dims(spectrogram, axis=-1)
+    input_data = np.array([spectrogram], dtype=np.float32)
+
+    # Perform inference with the TFLite model
+    interpreter.set_tensor(interpreter.get_input_details()[0]['index'], input_data)
+    interpreter.invoke()
+    output_data = interpreter.get_tensor(interpreter.get_output_details()[0]['index'])
+
+    # Convert the output to a category label
     categories = ['belly_pain', 'burping', 'discomfort', 'hungry', 'tired']
+    predicted_label = np.argmax(output_data)
     predicted_category = categories[predicted_label]
+
 
     # Close the TensorFlow session
     tf.keras.backend.clear_session()
@@ -109,5 +136,6 @@ def predict():
 if __name__ == '__main__':
     app.run()
 
+# to run ====> flask run --host=0.0.0.0
 # 'C:/Users/cli/Desktop/BABYTALKS/API/0D1AD73E-4C5E-45F3-85C4-9A3CB71E8856-1430742197-1.0-m-04-hu.wav'
 # C:/Users/HP/Downloads/donateacry-corpus-master/donateacry-corpus-master/donateacry_corpus_cleaned_and_updated_data/hungry.wav
