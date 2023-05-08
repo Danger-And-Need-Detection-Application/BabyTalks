@@ -24,7 +24,8 @@ class _HomeState extends State<Home> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             TextField(
               onChanged: (value) {
-                url = 'http://127.0.0.1:5000/api?query=' + value.toString();
+                //url = 'http://127.0.0.1:5000/api?query=' + value.toString();
+                url = 'http://100.70.34.175:5000/api?query=' + value.toString();
               },
             ),
             TextButton(
