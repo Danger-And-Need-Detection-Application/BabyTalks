@@ -17,7 +17,9 @@ class _MyAppState extends State<MyApp> {
           scaffoldBackgroundColor : Colors.white ,
         ),
         routes : {
-          "/" : (context) => HomePage()
+          "/" : (context) => HomePage(),
+          "/Homepage" : (context) => HomePage()
+
         }
     );
   }

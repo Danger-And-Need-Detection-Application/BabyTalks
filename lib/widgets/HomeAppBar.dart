@@ -7,14 +7,15 @@ class HomeAppBar extends StatelessWidget{
             color: Colors.white ,
             padding: EdgeInsets.all(25),
             child: Row(
-                children: const [
-                    Icon (
+                children: [
+                    const Icon (
                         Icons.sort ,
                         size: 30 ,
                         color: Color(0xFF4C53A5),
                     ),
-                    Padding(padding: EdgeInsets.only(
-                        left: 20,
+                    const Padding(
+                        padding: EdgeInsets.only(
+                            left: 20,
                         ),
                         child: Text(
                             "Baby Talks",
@@ -24,7 +25,10 @@ class HomeAppBar extends StatelessWidget{
                     Spacer(),
                     Badge(
                         child: InkWell(
-                            child: Icon(
+                            onTap: (){
+                                Navigator.pushNamed(context, '/Homepage');
+                            },
+                            child: const Icon(
                                 Icons.baby_changing_station,
                             ),
                         ),

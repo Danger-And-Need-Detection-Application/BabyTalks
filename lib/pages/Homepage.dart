@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:babytalk/widgets/HomeAppBar.dart';
 import 'package:babytalk/widgets/ItemsWeidget.dart';
@@ -38,6 +39,29 @@ class HomePage extends StatelessWidget{
                                 ItemsWeidget(),
                             ],
                         ),
+                    ),
+                ],
+            ),
+            bottomNavigationBar: CurvedNavigationBar(
+                backgroundColor: Colors.transparent,
+                onTap: (index){},
+                height: 50,
+                color: Color(0xFF4C35A5),
+                items: const [
+                    Icon(
+                        Icons.home ,
+                        size: 20 ,
+                        color:Colors.white,
+                    ),
+                    Icon(
+                        Icons.mic,
+                        size: 20 ,
+                        color:Colors.white,
+                    ),
+                    Icon(
+                        Icons.list,
+                        size: 20 ,
+                        color:Colors.white,
                     ),
                 ],
             ),

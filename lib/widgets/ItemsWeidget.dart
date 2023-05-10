@@ -5,9 +5,12 @@ class ItemsWeidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
       childAspectRatio: 0.68,
+      // Display the scroll functionnality of gridview
+      physics: const NeverScrollableScrollPhysics(),
       crossAxisCount: 2,
       shrinkWrap: true,
       children: [
+       for(int i=1 ; i<=10 ; i++)
         Container(
           padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
           margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
@@ -30,8 +33,8 @@ class ItemsWeidget extends StatelessWidget {
                 onTap: () {},
                 child: Container(
                   margin: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    "baby.jpg",
+                  child: Image(
+                    image: AssetImage('assets/images/$i.jpg'),
                     height: 120,
                     width: 120,
                   ),
@@ -46,6 +49,16 @@ class ItemsWeidget extends StatelessWidget {
                     fontSize: 18,
                     color: Color(0xFF4C53A5),
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  "Write the description",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF4C53A5),
                   ),
                 ),
               ),
