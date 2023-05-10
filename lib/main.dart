@@ -1,20 +1,19 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/materiel.dart';
+import 'package:BABYTALKS/pages/Homepage.dart';
 
-import 'home.dart';
+void main() => runApp(MyApp());
 
-void main() => runApp(new MyApp());
-
-
-
-class MyApp extends StatelessWidget {
-  const MyApp({ Key? key }) : super(key: key);
-
+class MyApp extends StatefulWidget{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Home(),
-
+       debugShowCheckedModeBanner: false,
+       theme: ThemeData(
+        ScaffoldBackgroudColor : Colors.white ,
+       ),
+       routes : {
+        "/" : (context) => HomePage()
+       }
     );
   }
 }
