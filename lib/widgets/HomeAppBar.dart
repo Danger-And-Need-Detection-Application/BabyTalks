@@ -1,4 +1,4 @@
-import 'package:flutter/materiel.dart';
+import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget{
     @override
@@ -7,7 +7,7 @@ class HomeAppBar extends StatelessWidget{
             color: Colors.white ,
             padding: EdgeInsets.all(25),
             child: Row(
-                children: [
+                children: const [
                     Icon (
                         Icons.sort ,
                         size: 30 ,
@@ -18,11 +18,17 @@ class HomeAppBar extends StatelessWidget{
                         ),
                         child: Text(
                             "Baby Talks",
-                            style: TextStyle(fontSize: 23, FontWeight: FontWeight.bold,color: Color(0xFF4C53A5),),
+                            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,color: Color(0xFF4C53A5),),
                         ),
                     ),
                     Spacer(),
-
+                    Badge(
+                        child: InkWell(
+                            child: Icon(
+                                Icons.baby_changing_station,
+                            ),
+                        ),
+                    ),
                 ],
             ),
         );
