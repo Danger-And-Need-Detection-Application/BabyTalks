@@ -44,10 +44,20 @@ class HomePage extends StatelessWidget{
             ),
             bottomNavigationBar: CurvedNavigationBar(
                 backgroundColor: Colors.transparent,
-                onTap: (index){},
+                onTap: (index){
+                    if(index == 0){
+                    
+                    }else if(index == 1){
+                        Navigator.pushNamed(context, "recordpage");
+                    }else{
+                        Navigator.pushNamed(context, "calenderpage");
+                    }
+                    
+                },
                 height: 50,
                 color: Color(0xFF4C35A5),
-                items: const [
+                index: 0,
+                items: [
                     Icon(
                         Icons.home ,
                         size: 20 ,
@@ -55,12 +65,12 @@ class HomePage extends StatelessWidget{
                     ),
                     Icon(
                         Icons.mic,
-                        size: 20 ,
-                        color:Colors.white,
+                      size: 20 ,
+                      color:Colors.white,
                     ),
                     Icon(
-                        Icons.list,
-                        size: 20 ,
+                      Icons.calendar_today,
+                      size: 20 ,
                         color:Colors.white,
                     ),
                 ],
