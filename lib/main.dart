@@ -1,20 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:babytalk/pages/Homepage.dart';
+import 'package:babytalk/pages/ItemPage.dart';
+import 'package:babytalk/pages/RecordPage.dart';
+import 'package:babytalk/pages/CalenderPage.dart';
 
-import 'home.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
-
-
-class MyApp extends StatelessWidget {
-  const MyApp({ Key? key }) : super(key: key);
-
+class MyApp extends StatefulWidget{
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Home(),
+  _MyAppState createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor : Colors.white ,
+        ),
+        routes : {
+          "/" : (context) => HomePage(),
+          "homepage" : (context) => HomePage(),
+          "itemPage" : (context) => ItemPage(),
+          "recordpage" : (context) => RecordPage(),
+          "calenderpage" : (context) => CalenderPage(),
+        }
     );
   }
 }
+
+
+
+
