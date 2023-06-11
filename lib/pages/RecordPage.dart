@@ -14,7 +14,8 @@ class RecordPage extends StatefulWidget {
 }
 
 class _RecordPageState extends State<RecordPage> {
-  bool _isClicked = false;
+  bool _isClicked1 = false;
+  bool _isClicked2 = false;
   bool _isRecording = false;
   bool _isPaused = false;
 
@@ -39,14 +40,7 @@ class _RecordPageState extends State<RecordPage> {
       body: ListView(
         children: [
           ItemAppBar("Recording"),
-          Center(
-        child: ElevatedButton(
-          onPressed: () {
-            pickFile(context);
-          },
-          child: Text('Select File'),
-        ),
-      ),
+          
           Center(
             child: Container(
               margin: EdgeInsets.all(40),
@@ -64,16 +58,36 @@ class _RecordPageState extends State<RecordPage> {
               ),
             ),
           ),
+      //     Center(
+      //   child: ElevatedButton(
+      //     onPressed: () {
+      //       pickFile(context);
+      //     },
+      //     child: Text(
+      //       'Select File',
+      //       style: TextStyle(
+      //         color: Colors.white,
+      //       )
+      //       ),
+      //   ),
+      // ),
           Container(
-    margin: EdgeInsets.symmetric(vertical: 50.0),
-            width: 200.0,
-            height: 200.0,
+    margin: EdgeInsets.symmetric(vertical: 30.0),
+    child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      Container(
+        child: Row(
+        children: [
+          Container(
+            width: 150.0,
+            height: 150.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: LinearGradient(
-                colors: _isClicked
-                    ? [Colors.pink, Colors.pink]
-                    : [Colors.white, Colors.white],
+                colors: _isClicked1
+                    ? [Colors.white, Colors.white]
+                    : [Colors.pink, Colors.pink],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: [0.0, 1.0],
@@ -82,57 +96,93 @@ class _RecordPageState extends State<RecordPage> {
             child: InkWell(
               onTap: () {
                 setState(() {
-                  _isClicked = !_isClicked;
+                  _isClicked1 = !_isClicked1;
                 });
               },
               child: Icon(
                 Icons.mic,
                 size: 150.0,
-                color: _isClicked ? Colors.white : Colors.pink,
+                color: _isClicked1 ? Colors.pink : Colors.white,
               ),
             ),
           ),
+    //         Container(
+    // child: Row(
+    //         children: [
+    //           SizedBox(
+    //     width: 100.0,
+    //     child: IconButton(
+    //       onPressed: null,
+    //       icon: Icon(
+    //         Icons.play_arrow,
+    //         size: 70,
+    //         color: Colors.purple,
+    //       ),
+    //     ),
+    //   ),
+    //           SizedBox(
+    //     width: 100.0,
+    //     child: IconButton(
+    //       onPressed: null,
+    //       icon: Icon(
+    //         Icons.pause,
+    //         size: 70,
+    //         color: Colors.purple,
+    //       ),
+    //     ),
+    //   ),
+    //           SizedBox(
+    //     width: 100.0,
+    //     child: IconButton(
+    //       onPressed: null,
+    //       icon: Icon(
+    //         Icons.stop,
+    //         size: 70,
+    //         color: Colors.purple,
+    //       ),
+    //     ),
+    //   ),
+    //         ],
+    //       ),
+        //   ),
+          
+        ],
+        ),     
+      ),
+    
           Container(
-    margin: EdgeInsets.symmetric(vertical: 50.0),
-    child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-        width: 100.0,
-        child: IconButton(
-          onPressed: null,
-          icon: Icon(
-            Icons.play_arrow,
-            size: 70,
-            color: Colors.purple,
+    margin: EdgeInsets.symmetric(vertical: 30.0),
+            width: 150.0,
+            height: 150.0,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: _isClicked2
+                    ? [Colors.white, Colors.white]
+                    : [Colors.pink, Colors.pink],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: [0.0, 1.0],
+              ),
+            ),
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  // _isClicked2 = !_isClicked2;
+                  pickFile(context);
+                });
+              },
+              child: Icon(
+                Icons.insert_drive_file,
+                size: 120.0,
+                color: _isClicked2 ? Colors.pink : Colors.white,
+              ),
+            ),
           ),
-        ),
-      ),
-              SizedBox(
-        width: 100.0,
-        child: IconButton(
-          onPressed: null,
-          icon: Icon(
-            Icons.pause,
-            size: 70,
-            color: Colors.purple,
+          ],
+    ),
           ),
-        ),
-      ),
-              SizedBox(
-        width: 100.0,
-        child: IconButton(
-          onPressed: null,
-          icon: Icon(
-            Icons.stop,
-            size: 70,
-            color: Colors.purple,
-          ),
-        ),
-      ),
-            ],
-          ),
-          ),
+          
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
