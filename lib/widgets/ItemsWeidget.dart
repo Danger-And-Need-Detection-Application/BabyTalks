@@ -5,7 +5,7 @@ class ItemsWeidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
       childAspectRatio: 0.68,
-      // Display the scroll functionnality of gridview
+      // Empêche le GridView de défiler
       physics: const NeverScrollableScrollPhysics(),
       crossAxisCount: 2,
       shrinkWrap: true,
@@ -23,6 +23,7 @@ class ItemsWeidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
+                  // Ajoute l'icône de favori
                   Icon(
                     Icons.favorite_border,
                     color: Colors.red,
@@ -31,11 +32,13 @@ class ItemsWeidget extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
+                  // Navigue vers la page de l'article
                   Navigator.pushNamed(context, "itemPage");
                 },
                 child: Container(
                   margin: const EdgeInsets.all(10),
                   child: Image(
+                    // Affiche l'image de l'article en fonction de son numéro
                     image: AssetImage('assets/images/$i.jpg'),
                     height: 120,
                     width: 120,
@@ -46,7 +49,8 @@ class ItemsWeidget extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 8),
                 alignment: Alignment.centerLeft,
                 child: const Text(
-                  "NAME OF ARTICLE",
+                  // Affiche le nom de l'article
+                  "NOM DE L'ARTICLE",
                   style: TextStyle(
                     fontSize: 18,
                     color: Color(0xFF4C53A5),
@@ -57,7 +61,8 @@ class ItemsWeidget extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: const Text(
-                  "Write the description",
+                  // Affiche la description de l'article
+                  "Écrire la description",
                   style: TextStyle(
                     fontSize: 15,
                     color: Color(0xFF4C53A5),
