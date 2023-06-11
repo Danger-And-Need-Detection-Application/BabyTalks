@@ -51,7 +51,7 @@ class _RecordPageState extends State<RecordPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.pink,
+                      color: Color(0xFF361500),
                     ),
                   ),
                 ],
@@ -87,7 +87,7 @@ class _RecordPageState extends State<RecordPage> {
               gradient: LinearGradient(
                 colors: _isClicked1
                     ? [Colors.white, Colors.white]
-                    : [Colors.pink, Colors.pink],
+                    : [Color(0xFFDEA057), Color(0xFFDEA057)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: [0.0, 1.0],
@@ -102,7 +102,7 @@ class _RecordPageState extends State<RecordPage> {
               child: Icon(
                 Icons.mic,
                 size: 150.0,
-                color: _isClicked1 ? Colors.pink : Colors.white,
+                color: _isClicked1 ? Color(0xFFDEA057) : Colors.white,
               ),
             ),
           ),
@@ -159,7 +159,7 @@ class _RecordPageState extends State<RecordPage> {
               gradient: LinearGradient(
                 colors: _isClicked2
                     ? [Colors.white, Colors.white]
-                    : [Colors.pink, Colors.pink],
+                    : [Color(0xFFDEA057), Color(0xFFDEA057)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: [0.0, 1.0],
@@ -175,7 +175,7 @@ class _RecordPageState extends State<RecordPage> {
               child: Icon(
                 Icons.insert_drive_file,
                 size: 120.0,
-                color: _isClicked2 ? Colors.pink : Colors.white,
+                color: _isClicked2 ? Color(0xFFDEA057) : Colors.white,
               ),
             ),
           ),
@@ -197,7 +197,7 @@ class _RecordPageState extends State<RecordPage> {
           }
         },
         height: 50,
-        color: Color(0xFF4C35A5),
+        color: Color(0xFF361500),
         index: 1,
         items: [
           Icon(

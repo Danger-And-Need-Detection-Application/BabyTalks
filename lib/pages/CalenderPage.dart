@@ -3,6 +3,7 @@ import 'package:babytalk/widgets/ItemAppBar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter/foundation.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -14,6 +15,9 @@ class CalenderPage extends StatefulWidget{
 }
 class _CalenderPageState extends State<CalenderPage>{
     DateTime today = DateTime.now();
+     
+    TimeOfDay? selectedDateTime;
+
     void _onDaySelected(DateTime day, DateTime focusedDay){
         setState(() {
             today = day;
@@ -27,7 +31,7 @@ class _CalenderPageState extends State<CalenderPage>{
     @override
     Widget build(BuildContext context){
         return Scaffold(
-        backgroundColor: Color(0xFFEDECF2),
+        backgroundColor: Color(0xFFF9E0BB),
         body: ListView(
             children: [
                 ItemAppBar("Calender"),
@@ -48,10 +52,22 @@ class _CalenderPageState extends State<CalenderPage>{
             onPressed: () {
               showTimePickerDialog(context);
             },
-            child: Text('Sélectionner une date'),
+            style: ElevatedButton.styleFrom(
+                primary: Color(0xFF361500), // Replace with your desired color
+            ),
+            child: Text(
+                'Sélectionner une date'
+                ),
           ),
         ),
-            ],
+        if (selectedDateTime != null)
+            Center(
+              child: Text(
+                'Date et heure sélectionnées: ${selectedDateTime.toString()}',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+        ],
         ),
         bottomNavigationBar: CurvedNavigationBar(
                 backgroundColor: Colors.transparent,
@@ -66,7 +82,7 @@ class _CalenderPageState extends State<CalenderPage>{
                     
                 },
                 height: 50,
-                color: Color(0xFF4C35A5),
+                color: Color(0xFF361500),
                 index: 2,
                 items: [
                     Icon(
@@ -100,23 +116,12 @@ Future<void> initializeNotifications() async {
 }
 
 void showTimePickerDialog(BuildContext context) async {
-  final TimeOfDay? selectedTime = await showTimePicker(
-    context: context,
-    initialTime: TimeOfDay.now(),
-  );
-
-  if (selectedTime != null) {
-    final now = DateTime.now();
-    final selectedDateTime = DateTime(
-      now.year,
-      now.month,
-      now.day,
-      selectedTime.hour,
-      selectedTime.minute,
+    final TimeOfDay? selectedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
     );
-    scheduleNotification(selectedDateTime);
+    
   }
-}
 
   void scheduleNotification(DateTime selectedDate) async {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();

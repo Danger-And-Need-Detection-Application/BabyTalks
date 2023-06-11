@@ -53,7 +53,7 @@ class ItemsWeidget extends StatelessWidget {
                   "NOM DE L'ARTICLE",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Color(0xFF4C53A5),
+                    color: Color(0xFF884A39),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -65,7 +65,7 @@ class ItemsWeidget extends StatelessWidget {
                   "Écrire la description",
                   style: TextStyle(
                     fontSize: 15,
-                    color: Color(0xFF4C53A5),
+                    color: Color(0xFF111111),
                   ),
                 ),
               ),

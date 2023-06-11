@@ -7,7 +7,7 @@ class ItemPage extends StatelessWidget{
     @override
   Widget build(BuildContext context){
     return Scaffold(
-        backgroundColor: Color(0xFFEDECF2),
+        backgroundColor: Color(0xFFF9E0BB),
         body: ListView(
             children: [
                 ItemAppBar("Article"),
@@ -38,7 +38,7 @@ class ItemPage extends StatelessWidget{
                                                     "Article Title",
                                                     style: TextStyle(
                                                         fontSize: 28,
-                                                        color: Color(0xFF4C53A5),
+                                                        color: Color(0xFF361500),
                                                         fontWeight: FontWeight.bold,
                                                     ),
                                                 ),
@@ -70,7 +70,7 @@ class ItemPage extends StatelessWidget{
                 }
             },
             height: 50,
-            color: Color(0xFF4C35A5),
+            color: Color(0xFF361500),
             index: 1,
             items: [
                 Icon(
