@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:babytalk/widgets/ItemAppBar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:babytalk/function.dart';
 
 class RecordPage extends StatefulWidget {
   @override
@@ -33,6 +39,14 @@ class _RecordPageState extends State<RecordPage> {
       body: ListView(
         children: [
           ItemAppBar("Recording"),
+          Center(
+        child: ElevatedButton(
+          onPressed: () {
+            pickFile(context);
+          },
+          child: Text('Select File'),
+        ),
+      ),
           Center(
             child: Container(
               margin: EdgeInsets.all(40),
@@ -155,4 +169,75 @@ class _RecordPageState extends State<RecordPage> {
       ),
     );
   }
+
+  Future<void> pickFile(BuildContext context) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      File fileToUpload = File(result.files.single.path!);
+      String storagePath = '${result.files.single.name}';
+      String url = '';
+      var data;
+      String output = 'cathegorie';
+
+      await uploadFileToFirebaseStorage(fileToUpload, storagePath);
+
+      url = 'http://192.168.43.250:5000/api?query=' + storagePath.toString();
+      data = await fetchdata(url);
+      var decoded = jsonDecode(data);
+      output = decoded['output'];
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Your baby is:'),
+            content: Text(output),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('No File Selected'),
+            content: Text('Please select a file to upload.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  Future<void> uploadFileToFirebaseStorage(File file, String storagePath) async {
+  try {
+    FirebaseStorage storage = FirebaseStorage.instance;
+
+    // Create a reference to the file location in Firebase Storage
+    Reference storageReference = storage.ref().child(storagePath);
+
+    // Upload the file to Firebase Storage
+    await storageReference.putFile(file);
+
+    print('File uploaded successfully!');
+  } catch (e) {
+    print('Error uploading file: $e');
+  }
+}
 }

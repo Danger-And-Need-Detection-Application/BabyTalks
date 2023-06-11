@@ -1,3 +1,9 @@
+import 'package:babytalk/firebase_options.dart';
+
+import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:babytalk/pages/Homepage.dart';
 import 'package:babytalk/pages/ItemPage.dart';
@@ -5,7 +11,11 @@ import 'package:babytalk/pages/RecordPage.dart';
 import 'package:babytalk/pages/CalenderPage.dart';
 
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget{
   @override
@@ -30,7 +40,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
 
 
 

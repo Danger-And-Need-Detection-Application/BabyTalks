@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "722321231787",
+    "firebase_url": "https://audios-453ef-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "audios-453ef",
+    "storage_bucket": "audios-453ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722321231787:android:05988b991711b763794cee",
+        "android_client_info": {
+          "package_name": "com.example.babytalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722321231787-5nbv6kt787l53dcp4f0d6funnj4r4luk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUz0qEHRmsF41Irq8L63TF-8F2o_f_yyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722321231787-5nbv6kt787l53dcp4f0d6funnj4r4luk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722321231787:android:54be0f5d6488f700794cee",
+        "android_client_info": {
+          "package_name": "com.example.fa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722321231787-5nbv6kt787l53dcp4f0d6funnj4r4luk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUz0qEHRmsF41Irq8L63TF-8F2o_f_yyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722321231787-5nbv6kt787l53dcp4f0d6funnj4r4luk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722321231787:android:a29a0cdcb5a820f1794cee",
+        "android_client_info": {
+          "package_name": "com.example.flutter_audio_recorder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722321231787-5nbv6kt787l53dcp4f0d6funnj4r4luk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUz0qEHRmsF41Irq8L63TF-8F2o_f_yyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722321231787-5nbv6kt787l53dcp4f0d6funnj4r4luk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
