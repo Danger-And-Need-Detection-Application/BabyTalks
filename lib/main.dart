@@ -10,36 +10,35 @@ import 'package:babytalk/pages/ItemPage.dart';
 import 'package:babytalk/pages/RecordPage.dart';
 import 'package:babytalk/pages/CalenderPage.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget{
+class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          scaffoldBackgroundColor : Colors.white ,
+          scaffoldBackgroundColor: Colors.white,
         ),
-        routes : {
-          "/" : (context) => HomePage(),
-          "homepage" : (context) => HomePage(),
-          "itemPage" : (context) => ItemPage(),
-          "recordpage" : (context) => RecordPage(),
-          "calenderpage" : (context) => CalenderPage(),
-        }
-    );
+        routes: {
+          "/": (context) => HomePage(),
+          "homepage": (context) => HomePage(),
+          "itemPage": (context) => ItemPage(
+                image: '',
+                description: '',
+                title: '',
+              ),
+          "recordpage": (context) => RecordPage(),
+          "calenderpage": (context) => CalenderPage(),
+        });
   }
 }
-
-
-
