@@ -611,7 +611,7 @@ content: Text('tired'),
 
       await uploadFileToFirebaseStorage(fileToUpload, storagePath);
 
-      url = 'http://192.168.43.250:5000/api?query=' + storagePath.toString();
+      url = 'http://192.168.1.110:5000/api?query=' + storagePath.toString();
       data = await fetchdata(url);
       var decoded = jsonDecode(data);
       output = decoded['output'];
