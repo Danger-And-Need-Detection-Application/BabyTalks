@@ -445,6 +445,7 @@ content: Text('tired'),
       //       ),
       //   ),
       // ),
+
           Container(
     margin: EdgeInsets.symmetric(vertical: 30.0),
     child: Row(
@@ -469,6 +470,7 @@ content: Text('tired'),
             ),
             child: InkWell(
               onTap: () {
+
                 setState(() async {
                     if(recorder.isRecording){
                       await stop();
