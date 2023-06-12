@@ -50,6 +50,7 @@ class ItemsWeidget extends StatelessWidget {
       crossAxisCount: 2,
       shrinkWrap: true,
       children: [
+
         for (int i = 0; i < articles.length; i++)
           Container(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
@@ -111,6 +112,7 @@ class ItemsWeidget extends StatelessWidget {
                       fontSize: 15,
                       color: Color(0xFF4C53A5),
                     ),
+
                   ),
                 ),
               ],

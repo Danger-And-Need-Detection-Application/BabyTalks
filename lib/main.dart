@@ -5,6 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+
+// Import des pages de l'application
 import 'package:babytalk/pages/Homepage.dart';
 import 'package:babytalk/pages/ItemPage.dart';
 import 'package:babytalk/pages/RecordPage.dart';
@@ -26,9 +28,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+
+        // Définition du thème global de l'application
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
         ),
+
         routes: {
           "/": (context) => HomePage(),
           "homepage": (context) => HomePage(),
@@ -42,3 +47,4 @@ class _MyAppState extends State<MyApp> {
         });
   }
 }
+

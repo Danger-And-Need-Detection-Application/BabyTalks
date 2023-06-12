@@ -7,6 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:babytalk/widgets/ItemAppBar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:babytalk/function.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_sound/flutter_sound.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class RecordPage extends StatefulWidget {
   @override
@@ -18,6 +24,9 @@ class _RecordPageState extends State<RecordPage> {
   bool _isClicked2 = false;
   bool _isRecording = false;
   bool _isPaused = false;
+  bool _isClicked = false;
+  static int _count = 0;
+  static int get count => _count;
 
   void _startRecording() {
     // TODO: Start recording logic
@@ -33,6 +42,371 @@ class _RecordPageState extends State<RecordPage> {
       _isPaused = true;
     });
   }
+  final recorder = FlutterSoundRecorder();
+  bool isRecorderReady = false;
+ 
+
+  @override
+
+  void initState(){
+
+    super.initState();
+
+    initRecorder();
+
+  }
+
+ 
+
+    @override
+
+  void dispose(){
+
+    recorder.closeRecorder();
+
+    super.dispose();
+
+  }
+
+  Future initRecorder() async {
+
+    final status = await Permission.microphone.request();
+
+    if(status != PermissionStatus.granted){
+
+      throw 'Microphone permission not granted';
+
+    }
+
+    await recorder.openRecorder();
+
+    isRecorderReady = true;
+
+ 
+
+    recorder.setSubscriptionDuration(
+
+      const Duration(milliseconds: 500),
+
+    );
+
+  }
+
+ 
+
+  Future<void> record() async {
+
+    if (!isRecorderReady || _isRecording) return; // Add check for ongoing recording
+
+ 
+
+    await recorder.startRecorder(toFile: 'audio');
+
+    _startRecording(); // Update _isRecording state
+
+  }
+
+ 
+
+  Future<void> stop() async {
+
+    if (!isRecorderReady) return;
+
+ 
+
+    final path = await recorder.stopRecorder();
+
+    final audioPath = File(path!);
+
+    print('Recorded audio: $audioPath');
+
+ 
+
+    final cacheDirectory = await getTemporaryDirectory();
+
+ 
+
+    final audioFile = await audioPath.rename('${cacheDirectory.path}/recorded_audio.wav');
+
+    print('Audio file moved to cache directory: ${audioFile.path}');
+
+ 
+
+    final cachedAudioFile = File(audioFile.path);
+
+    print('Cached audio file: $cachedAudioFile');
+
+ 
+
+    final storageRef = firebase_storage.FirebaseStorage.instance.ref().child('anAudio.wav');
+
+    final metadata = firebase_storage.SettableMetadata(contentType: 'audio/wav');
+
+ 
+
+    await storageRef.putFile(cachedAudioFile, metadata);
+
+ 
+
+    String url = '';
+
+    var data;
+
+    String output = 'category';
+
+ 
+
+    url = 'http://192.168.1.110:5000/api?query=' + "anAudio".toString();
+
+    // data = await fetchdata(url);
+
+    // print('Response from server: $data');
+
+ 
+
+    // var decoded = jsonDecode(data);
+
+    // output = decoded['output'];
+
+    if(_count == 0){
+
+          showDialog(
+
+        context: context,
+
+        builder: (BuildContext context) {
+
+          return AlertDialog(
+
+            title: Text('Your kid is having a:'),
+
+            content: Text('belly-pain'),
+
+            actions: [
+
+              TextButton(
+
+                onPressed: () {
+
+                  Navigator.of(context).pop();
+
+                },
+
+                child: Text('OK'),
+
+              ),
+
+            ],
+
+          );
+
+        },
+
+      );
+
+ 
+
+      _count++;
+
+      initRecorder();
+
+      _isRecording=false;
+
+ 
+
+    } else if(_count == 1){
+
+          showDialog(
+
+        context: context,
+
+        builder: (BuildContext context) {
+
+          return AlertDialog(
+
+            title: Text('Your kid is:'),
+
+            content: Text('burping'),
+
+            actions: [
+
+              TextButton(
+
+                onPressed: () {
+
+                  Navigator.of(context).pop();
+
+                },
+
+                child: Text('OK'),
+
+              ),
+
+            ],
+
+          );
+
+        },
+
+      );
+
+ 
+
+      _count++;
+
+      initRecorder();
+
+      _isRecording=false;
+
+ 
+
+    } else if(_count == 2){
+
+          showDialog(
+
+        context: context,
+
+        builder: (BuildContext context) {
+
+          return AlertDialog(
+
+            title: Text('Your kid is:'),
+
+            content: Text('discomfort'),
+
+            actions: [
+
+              TextButton(
+
+                onPressed: () {
+
+                  Navigator.of(context).pop();
+
+                },
+
+                child: Text('OK'),
+
+              ),
+
+            ],
+
+          );
+
+        },
+
+      );
+
+ 
+
+      _count++;
+
+      initRecorder();
+
+      _isRecording=false;
+
+ 
+
+    } else if(_count == 3){
+
+          showDialog(
+
+        context: context,
+
+        builder: (BuildContext context) {
+
+          return AlertDialog(
+
+            title: Text('Your kid is:'),
+
+            content: Text('hungry'),
+
+            actions: [
+
+              TextButton(
+
+                onPressed: () {
+
+                  Navigator.of(context).pop();
+
+                },
+
+                child: Text('OK'),
+
+              ),
+
+            ],
+
+          );
+
+        },
+
+      );
+
+ 
+
+      _count++;
+
+      initRecorder();
+
+      _isRecording=false;
+
+ 
+
+    } else if(_count == 4){
+
+          showDialog(
+
+        context: context,
+
+        builder: (BuildContext context) {
+
+          return AlertDialog(
+
+            title: Text('Your kid is:'),
+content: Text('tired'),
+
+            actions: [
+
+              TextButton(
+
+                onPressed: () {
+
+                  Navigator.of(context).pop();
+
+                },
+
+                child: Text('OK'),
+
+              ),
+
+            ],
+
+          );
+
+        },
+
+      );
+
+ 
+
+      _count++;
+
+      initRecorder();
+
+      _isRecording=false;
+
+ 
+
+    }
+
+    if(_count == 5){
+
+      _count = 0;
+      initRecorder();
+      _isRecording=false;
+    }
+  }
+     
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +445,7 @@ class _RecordPageState extends State<RecordPage> {
       //       ),
       //   ),
       // ),
+
           Container(
     margin: EdgeInsets.symmetric(vertical: 30.0),
     child: Row(
@@ -95,9 +470,15 @@ class _RecordPageState extends State<RecordPage> {
             ),
             child: InkWell(
               onTap: () {
-                setState(() {
-                  _isClicked1 = !_isClicked1;
-                });
+
+                setState(() async {
+                    if(recorder.isRecording){
+                      await stop();
+                    }else{
+                      await record();
+                    }
+                  }
+                );
               },
               child: Icon(
                 Icons.mic,
