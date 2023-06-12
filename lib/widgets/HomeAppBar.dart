@@ -15,7 +15,7 @@ class HomeAppBar extends StatelessWidget{
                         child: const Icon (
                         Icons.sort ,
                         size: 30 ,
-                        color: Color(0xFF4C53A5),
+                        color: Color(0xFF361500),
                     ),
                     ),
                     const Padding(
@@ -24,7 +24,7 @@ class HomeAppBar extends StatelessWidget{
                         ),
                         child: Text(
                             "Baby Talks",
-                            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,color: Color(0xFF4C53A5),),
+                            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,color: Color(0xFF361500),),
                         ),
                     ),
                     Spacer(),

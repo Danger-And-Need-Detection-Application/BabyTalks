@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget{
                         // height: 500,
                         padding: EdgeInsets.only(top:15),
                         decoration: const BoxDecoration(
-                            color: Color(0xFFEDECF2),
+                            color: Color(0xFFF9E0BB),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(35),
                                 topRight: Radius.circular(35),
@@ -32,7 +32,8 @@ class HomePage extends StatelessWidget{
                                         style: TextStyle(
                                             fontSize: 25,
                                             fontWeight: FontWeight.bold,
-                                            color: Color(0xFF4C35A5),
+                                            // color: Color(0xFFE8A9A9),
+                                            color: Color(0xFF884A39),
                                         ),
                                     ),
                                 ),
@@ -55,7 +56,7 @@ class HomePage extends StatelessWidget{
                     
                 },
                 height: 50,
-                color: Color(0xFF4C35A5),
+                color: Color(0xFF361500),
                 index: 0,
                 items: [
                     Icon(

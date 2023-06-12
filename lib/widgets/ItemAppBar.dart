@@ -21,7 +21,7 @@ class _ItemAppBarState extends State<ItemAppBar> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back, size: 30, color: Color(0xFF4C53A5)),
+            child: Icon(Icons.arrow_back, size: 30, color: Color(0xFF361500)),
           ),
           Padding(
             padding: EdgeInsets.only(left: 20),
@@ -30,7 +30,7 @@ class _ItemAppBarState extends State<ItemAppBar> {
               style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF4C53A5),
+                color: Color(0xFF361500),
               ),
             ),
           ),
