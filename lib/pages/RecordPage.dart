@@ -156,7 +156,7 @@ class _RecordPageState extends State<RecordPage> {
 
  
 
-    url = 'http://192.168.1.110:5000/api?query=' + "anAudio".toString();
+    url = 'http://100.70.33.118:5000/api?query=' + "anAudio".toString();
 
     // data = await fetchdata(url);
 
@@ -178,9 +178,9 @@ class _RecordPageState extends State<RecordPage> {
 
           return AlertDialog(
 
-            title: Text('Your kid is having a:'),
+            title: Text('Your kid is:'),
 
-            content: Text('belly-pain'),
+            content: Text('burping'),
 
             actions: [
 
@@ -224,9 +224,9 @@ class _RecordPageState extends State<RecordPage> {
 
           return AlertDialog(
 
-            title: Text('Your kid is:'),
+            title: Text('Your kid is having:'),
 
-            content: Text('burping'),
+            content: Text('belly-pain'),
 
             actions: [
 
@@ -613,7 +613,7 @@ content: Text('tired'),
 
       await uploadFileToFirebaseStorage(fileToUpload, storagePath);
 
-      url = 'http://192.168.1.110:5000/api?query=' + storagePath.toString();
+      url = 'http://100.70.33.118:5000/api?query=' + storagePath.toString();
       data = await fetchdata(url);
       var decoded = jsonDecode(data);
       output = decoded['output'];
